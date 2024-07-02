@@ -1,4 +1,4 @@
-DB구축
+
 1. 소스파일을 받은 후 콘솔에서 npm install을 통해 modules을 받아주세요
 2. PostgreSQL에서 데이터베이스를 생성해 주세요 (소스 파일에서는 memberapi라는 이름으로 데이터베이스를 만들었습니다.)
 3. PostGIS가 설치가 안되어 있다면 설치해주세요
