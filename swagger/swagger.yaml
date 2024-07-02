@@ -22,28 +22,86 @@ paths:
 
   /member/getMemberList:
     get:
-      summary: 멤버리스트
+      summary: 멤버 리스트 조회
+      description: "osm_id, start_date, end_date, name, nickname을 기반으로 멤버 리스트를 조회"
       parameters:
         - name: osm_id
           in: query
           schema:
             type: string
+          description: "osm_id 구역 내에 살고있는 회원 필터링"
         - name: start_date
           in: query
           schema:
             type: string
+          description: "start_date 이후에 태어난 회원 필터링 (형식: YYYY-MM-DD)"
         - name: end_date
           in: query
           schema:
             type: string
+          description: "start_date 이전에 태어난 회원 필터링 (형식: YYYY-MM-DD)"
         - name: name
           in: query
           schema:
             type: string
+          description: "해당 이름을 포함하는 회원 필터링"
         - name: nickname
           in: query
           schema:
             type: string
+            description: "해당 닉네임을 포함하는 회원 필터링"
+      responses:
+        "200":
+          description: "여기?"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: 멤버 ID
+                    name:
+                      type: string
+                      description: 이름
+                    nickname:
+                      type: string
+                      description: 닉네임
+                    birthday:
+                      type: string
+                      description: 생년월일
+                    createdAt:
+                      type: string
+                      description: 생성일시
+                    updatedAt:
+                      type: string
+                      description: 수정일시
+                    location:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: 좌표 타입
+                        coordinates:
+                          type: array
+                          minItems: 2
+                          maxItmes: 2
+                          items:
+                            type: number
+                          description: 좌표
+                    score:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          subject:
+                            type: string
+                            description: 과목
+                          score:
+                            type: number
+                            description: 점수
 
   /member/getAvgScoreFromLocation:
     get:

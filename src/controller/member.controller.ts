@@ -70,7 +70,7 @@ export const memberController = {
     deleteMember : async (req: Request, res: Response) => {
         const result: number = await memberService.deleteMember(req.body);
         res.json({
-            // 0: 정상처리, -1 : 파라미터에 memberId가 비어있음, -2: DB등록 에러
+            // 0: 정상처리, -1 : 파라미터에 memberId가 비어있음, -2: DB에러
             result : result
         })
     }

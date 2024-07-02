@@ -4,7 +4,6 @@ import {SubjectType, Score } from '../entity/score';
 import { AppDataSource } from '../config/data-source';
 import { EntityManager, SelectQueryBuilder } from 'typeorm';
 import { Response } from 'express';
-import * as path from 'path';
 import * as fs from'fs';
 
 
@@ -278,7 +277,7 @@ export const memberService = {
             if(!body.memberId){
                 throw new Error('멤버Id가 비어있음');
             }
-            //await transactionalEntityManager.delete(Score, body.memberId);
+
             await transactionalEntityManager.createQueryBuilder()
                                             .delete()
                                             .from(Score)
