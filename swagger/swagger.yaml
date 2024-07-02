@@ -1,0 +1,213 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Member API
+  description: Member API 문서입니다
+servers:
+  - url: http://localhost:3005
+paths:
+  /member/insertInitData:
+    get:
+      summary: 초기 데이터 저장
+      responses:
+        "200":
+          description: "result값 0: 초기데이터 저장 성공, -1: member 데이터 등록 실패, -2: district 데이터 등록 실패"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: number
+
+  /member/getMemberList:
+    get:
+      summary: 멤버리스트
+      parameters:
+        - name: osm_id
+          in: query
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          schema:
+            type: string
+        - name: name
+          in: query
+          schema:
+            type: string
+        - name: nickname
+          in: query
+          schema:
+            type: string
+
+  /member/getAvgScoreFromLocation:
+    get:
+      summary: 해당 지역 과목별 평균 점수 조회
+      parameters:
+        - name: osm_id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "[{english, 88.88}, {math , 66.66}] 이런식으로 제공됩니다."
+          content:
+            application/json:
+              schema:
+                type: array
+                imtes:
+                  type: object
+                  properties:
+                    subject:
+                      type: string
+                    avgScore:
+                      type: number
+
+  /member/downloadMemberList:
+    get:
+      summary: 회원 목록 CSV 다운로드
+      parameters:
+        - name: osm_id
+          in: query
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          schema:
+            type: string
+        - name: name
+          in: query
+          schema:
+            type: string
+        - name: nickname
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "다운로드 실패시 result: -1이 리턴 됩니다. (성공시에는 파일을 다운받습니다.)"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: number
+
+  /member/registerMember:
+    post:
+      summary: 신규 회원 등록
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - nickname
+                - birthday
+                - geometry
+              type: object
+              properties:
+                name:
+                  type: string
+                nickname:
+                  type: string
+                birthday:
+                  type: string
+                coordinates:
+                  type: array
+                  minItems: 2
+                  maxItmes: 2
+                  items:
+                    type: number
+                score:
+                  type: array
+                  maxItems: 3
+                  items:
+                    type: object
+                    required:
+                      - subject
+                      - score
+                    properties:
+                      subject:
+                        type: string
+                      score:
+                        type: number
+      responses:
+        "200":
+          description: "result값 0: 정상 처리, -1: 닉네임 중복, -2: 점수 등록 실패, -3: DB 등록 에러"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: number
+
+  /member/registerScore:
+    post:
+      summary: 점수 등록
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 1
+              items:
+                type: object
+                required:
+                  - memberId
+                  - subject
+                  - score
+                properties:
+                  memberId:
+                    type: number
+                  subject:
+                    type: string
+                  score:
+                    type: number
+      responses:
+        "200":
+          description: "result값 0:정상 처리, -1 : 멤버없음, -2 : 유효하지 않은 과목, -3: 점수 범위 에러, -4 : DB등록 에러"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: number
+
+  /member/deleteMember:
+    post:
+      summary: 회원 삭제
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - memberId
+              properties:
+                memberId:
+                  type: number
+      responses:
+        "200":
+          description: "result값 0: 정상처리, -1 : 파라미터에 memberId가 비어있음, -2: DB등록 에러"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: number
