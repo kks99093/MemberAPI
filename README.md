@@ -7,5 +7,5 @@ DB구축
 6. 콘솔에서 npm start를 입력해 api서버를 실행해 주세요
 7. http://localhost:3005/api-docs/ 에 접속하셔서 /member/insertInitData를 한번 실행해주세요 
   (데이터를 DB에 넣는데 몇초정도 걸릴수 있습니다)
-8. http://localhost:3005/api-docs/에서 나머지 API를 테스트 해보실 수 있습니다.
+8. http://localhost:3005/api-docs/ 에서 나머지 API를 테스트 해보실 수 있습니다.
 
