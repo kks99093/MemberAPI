@@ -110,7 +110,7 @@
   ]
   ```
   </br>
-* <h4>"/member/deleteMember" : 회원 정보를 DB에서 삭제합니다. </h4>
+* <h4>"/member/deleteMember" : 회원 정보를 DB에서 삭제합니다. (참조 중인 점수 데이터도 함께 삭제됩니다.) </h4>
   + 파라미터 : memberId 데이터를 아래의 JSON 형태로 요청
   + 헤더셋팅 : Content-Type: application/json
   + 반환값 : { result : number} 형태의 JSON 반환</br>
