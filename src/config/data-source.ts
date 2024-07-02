@@ -8,7 +8,7 @@ export const AppDataSource = new DataSource({
     "port": 5432,
     "username": "postgres",
     "password": "admin1234",
-    "database": "naraspace",
+    "database": "memberapi",
     "synchronize": true,
     "dropSchema" : false,
     "logging": false,
