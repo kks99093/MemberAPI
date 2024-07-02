@@ -3,7 +3,7 @@
 </br> (modules 설치 시간이 1분정도 걸릴수도 있습니다.)
 2. PostgreSQL에서 데이터베이스를 생성해 주세요 (소스 파일에서는 memberapi라는 이름으로 데이터베이스를 만들었습니다.)
 3. PostGIS가 설치가 안되어 있다면 설치해주세요
-4. src/config/data-source.ts 파일의 username, password, database를 변경해 주세요
+4. src/config/data-source.ts 파일의 username, password, database를 사용하시는 분의 DB에 맞게 변경해 주세요.
 5. 콘솔에서 npm run build를 통해 ts파일을 js파일로 컴파일 해주세요  
 6. 콘솔에서 npm start를 입력해 api서버를 실행해 주세요
    </br>(5번 6번의 과정없이 npm run dev를 통해 컴파일 없이 ts파일을 실행 하셔도 됩니다.)
